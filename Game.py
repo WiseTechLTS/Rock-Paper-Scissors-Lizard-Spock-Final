@@ -1,9 +1,10 @@
 import random
+import Player
 # 
 ##
 ### Rock Paper Scissors Lizard Spock
 ###            Final
-##
+##          Inheritance 
 # 
 #   Before you begin coding, write an algorithm that represents the steps necessary to #   play a game of rock, paper, scissors, lizard, Spock in a best-of-three format. By #   writing out the steps, it will make you think about every piece needed to bring the #   game to life. Please submit to your instructor Slack channel once completed for  #   approval to start coding. Below is an example of how to get started:
 
@@ -60,7 +61,7 @@ def rpsls(name):
     player_number = name_to_integer(name)
     comp_number = random.randrange(0, 5)
 
-    print("Player chooses", name)
+    print(f'{"Player 1 chooses", name}')
     print(f'{"Computer chooses", integer_to_name(comp_number)}')
 
     if (comp_number +1) % 5 == player_number:
