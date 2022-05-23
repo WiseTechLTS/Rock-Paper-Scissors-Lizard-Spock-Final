@@ -1,7 +1,8 @@
-#import Player
+#from PlayerClass import Player
 #import random 
 
-#class CompAi(Player):
+#class Ai(Player):
 #    def __init__(self):
-#        self.comp_name = "Cortana"
-#        self.comp_num = random.randrange(0,5)
+#        self.name = 'Cortana'
+#        self.round_wins = int()
+#        super().__init__()
