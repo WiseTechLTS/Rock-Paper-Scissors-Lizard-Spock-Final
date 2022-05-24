@@ -1,11 +1,19 @@
-#from Game import Rpsls_gesture
+#(15 points): As a developer, I want to find a way to properly incorporate inheritance into my game.
+class Player:
+    def __init__(self, name):
+        self.name = name 
+        self.listed_gestures = ["rock", "paper", "scissors", "lizard", "spock"]
+        self.player_choice = ''
+        self.current_score = 0
 
 
-#class Player:
-#    def __init__(self):
-#        self.player_name = "Player 1"
-#        self.player2_name = "Tony"
-#        self.Rpsls_gesture = []
-    
-#    def prepare(self):
-#        pass 
+    def player_choice(self):
+
+        pass
+
+    def current_score(self):
+        self.current_score += 1 
+# (10 points): As a developer, I want to store all of the gesture options/choices in a list. I want to find
+# a way to utilize the list of gestures within my code(display gesture options, assign player a gesture, etc).
+
+        

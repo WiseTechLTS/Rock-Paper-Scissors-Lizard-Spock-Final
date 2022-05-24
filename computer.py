@@ -10,5 +10,5 @@ class Computer(Player):
     def computer_choice(self):
         self.computer_choice = choice(self.listed_gestures)
 
-    def round_won(self):
+    def current_score(self):
         self.current_score += 1
