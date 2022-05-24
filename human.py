@@ -1,5 +1,5 @@
 # We need to import our Player class
-import Player
+from player import Player
 
 class Human(Player):
     def __init__(self,name):

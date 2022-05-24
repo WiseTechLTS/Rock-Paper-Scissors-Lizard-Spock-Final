@@ -1,5 +1,7 @@
-from GameTime import Game
+from game import Game
+# import the Game file and then instantiate it 
+game = Game()
+game.run_game()
 
-if __name__ == '__main__':
-    newGame = Game()
-    newGame.StartGame()
+print('The End')
+

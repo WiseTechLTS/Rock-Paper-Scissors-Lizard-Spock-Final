@@ -1,5 +1,5 @@
 # Import Player class and random
-import Player 
+from player import Player 
 from random import choice 
 
 class Computer(Player):

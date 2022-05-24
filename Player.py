@@ -8,8 +8,7 @@ class Player:
 
 
     def player_choice(self):
-
-        pass
+        self.player_choice = ''
 
     def current_score(self):
         self.current_score += 1 
