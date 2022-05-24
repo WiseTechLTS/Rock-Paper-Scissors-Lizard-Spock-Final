@@ -4,112 +4,112 @@ from player import Player
 from random import choice 
 
 class Game:
-    def __init__(self):
-        self.player_one = Human('player_one')
-        self.player_two = Player('player_two')
-        
-        self.listed_gestures = ["rock", "paper", "scissors", "lizard", "spock"]
-        
-        # This is all the players needed We will assign computer as player_two if chosen
+   def __init__(self):
+       self.player_one = Human('player_one')
+       self.player_two = Player('player_two')
+       
+       self.listed_gestures = ["rock", "paper", "scissors", "lizard", "spock"]
+       
+       # This is all the players needed We will assign computer as player_two if chosen
+   
+   def run_game(self):
+       self.display_welcome()
+       self.display_rules()
+       self.select_opponent()
+       self.play()
+       self.display_winner()  
+    # (5 points): As a developer, I want to make at least 10 commits with descriptive messages.
+    # Display welcome message
+   def display_welcome(self):
+       print('Welcome to Rock Paper Scissors Lizard Spock Final! ')
+    # Print Rules
+   def display_rules(self):
+       print('// Rock crushes Scissors')
+       print('// Scissors cuts Paper') 
+       print('// Paper covers Rock')
+       print('// Rock crushes Lizard') 
+       print('// Lizard poisons Spock')
+       print('// Spock smashes Scissors')
+       print('// Scissors decapitates Lizard')
+       print('// Lizard eats Paper') 
+       print('// Paper disproves Spock')
+       print('// Spock vaporizes Rock')
+   
+    # Function to select opponents
+    # (10 points): As a player, I want the option of a single player (human vs AI) or a multiplayer (human vs human) game.
+    # We need a tool to choose between Player vs. Ai
+    # Or Player vs. Player
+    # Function for game selection
+   def select_opponent(self):
+       response = input('Type 1 for Player vs. Ai:  or  2 for Player vs. Player:  ')
+       if response == '1':
+           self.player_two = Computer('player_two')
+           print('Player vs. Ai!')
+       elif response == '2':
+           self.player_two = Human('player_two')
+           print('Player vs. Human')
     
-    def run_game(self):
-        self.display_welcome()
-        self.display_rules()
-        self.select_opponent()
-        self.play()
-        self.display_winner()
-
-     # (5 points): As a developer, I want to make at least 10 commits with descriptive messages.
-     # Display welcome message
-    def display_welcome(self):
-        print('Welcome to Rock Paper Scissors Lizard Spock Final! ')
-     # Print Rules
-    def display_rules(self):
-        print('// Rock crushes Scissors')
-        print('// Scissors cuts Paper') 
-        print('// Paper covers Rock')
-        print('// Rock crushes Lizard') 
-        print('// Lizard poisons Spock')
-        print('// Spock smashes Scissors')
-        print('// Scissors decapitates Lizard')
-        print('// Lizard eats Paper') 
-        print('// Paper disproves Spock')
-        print('// Spock vaporizes Rock')
-    
-     # Function to select opponents
-     # (10 points): As a player, I want the option of a single player (human vs AI) or a multiplayer (human vs human) game.
-     # We need a tool to choose between Player vs. Ai
-     # Or Player vs. Player
-     # Function for game selection
-    def select_opponent(self):
-        response = input('Type 1 for Player vs. Ai:  or  2 for Player vs. Player:  ')
-        if response == '1':
-            self.player_two = Computer('player_two')
-            print('Player vs. Ai!')
-        elif response == '2':
-            self.player_two = Human('player_two')
-            print('Player vs. Human')
-     
-     # Main PLAY FUNCTION Best of Three 
-    def play(self):
-        self.player_one.player_choice
-        self.player_two.player_choice
-        self.player_one_wins = 0
-        self.player_two_wins = 0
-    # While loop for the main game phase
-    # (10 points): As a player, I want the game of RPSLS to be at minimum a ‘best of three’ to decide a winner.
-        while self.player_one.current_score < 2 and self.player_two.current_score < 2:
-         # We want 
-            print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
-            player_choice = input()
+    # Main PLAY FUNCTION Best of Three 
+   def play(self):
+       self.player_one.player_choice
+       self.player_two.player_choice
+       self.player_one_wins = 0
+       self.player_two_wins = 0
+   # While loop for the main game phase
+   # (10 points): As a player, I want the game of RPSLS to be at minimum a ‘best of three’ to decide a winner.
+       while self.player_one_wins < 2 and self.player_two_wins < 2:
+        # We want 
+         print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
+         self.player_one.player_choice = input()
+         self.player_two.player_choice = input()
          # This is how we define our players choice
-            player_choice = player_choice.lower()
+         self.player_two.player_choice = self.player_two.player_choice.lower()
          # Print our players choice desired = "Player Picked" playerChoice
-            print("Player Picked", player_choice)
+         print("Player Picked", self.player_one.player_choice)
+         print("Player Two Picked", self.player_two.player_choice)
          # This is our random computer choice
          # We import random.choice so that we can randomly select from our 5 choices
-            computer_choice = choice(self.listed_gestures)
+         computer_choice = choice(self.listed_gestures)
          # Display "Computer picked:" computerChoice
-            print("Computer picked:", computer_choice)
+         print("Computer picked:", computer_choice)
          # (10 points): As a developer, I want to store all of the gesture options/choices in a list. I want to find
-            choice_dictionary = {"rock": 0, "paper": 1, "scissors": 2, "lizard": 3, "spock": 4}
+         choice_dictionary = {"rock": 0, "paper": 1, "scissors": 2, "lizard": 3, "spock": 4}
        
-            choice_index = choice_dictionary.get(player_choice, 3)
-            computer_index = choice_dictionary.get(computer_choice)
+         choice_index = choice_dictionary.get(self.player_one.player_choice, 3)
+         computer_index = choice_dictionary.get(computer_choice)
 
          ##  Our matrix is numbered to represent if we will win, lose, tie or be invalid
-            result_matrix = [ [0,2,1,1,2],
-                              [1,0,2,2,1],
-                              [2,1,0,1,2],
-                              [2,1,2,0,1],
-                              [1,2,1,2,0],
-                              [3,3,3,3,3] ]
+         result_matrix = [ [0,2,1,1,2],
+                           [1,0,2,2,1],
+                           [2,1,0,1,2],
+                           [2,1,2,0,1],
+                           [1,2,1,2,0],
+                           [3,3,3,3,3] ]
 
 
          #(5 points): As a developer, I want to account for and handle bad user input, ensuring that any user input is validated and reobtained if necessary.
-
-            result_idx = result_matrix[choice_index][computer_index]
-            result_note = {"Tie Round!": 0, "You Win!": 1, 'Sorry, you lose': 2, 'invalid choice, try again': 3}
-            #result = result_note[result_idx]
-            needed_wins =2
+         result_idx = result_matrix[choice_index][computer_index]
+         result_note = {"Tie Round!": 0, "You Win!": 1, 'Sorry, you lose': 2, 'invalid choice, try again': 3}
+         #result = result_note[result_idx]
+         needed_wins =2
             
-            if result_idx == 0:
-               print('Tie')
-            elif result_idx == 1:
-               print('Player Winner')
-               self.player_one_wins +=1
-            elif result_idx ==2:
-               print('Computer / Human Winner!')
-               self.player_two_wins +=1
-            elif result_idx == 3:
-               print('Invaild input. Try again: ')   
-               print(result_idx)
-               input()
-            if self.player_one_wins == needed_wins or self.player_two_wins == needed_wins:
-               break
+         if result_idx == 0:
+            print('Tie')
+         elif result_idx == 1:
+            print('Player Winner')
+            self.player_one_wins +=1
+         elif result_idx ==2:
+            print('Computer / Human Winner!')
+            self.player_two_wins +=1
+         elif result_idx == 3:
+            print('Invaild input. Try again: ')   
+            print(result_idx)
+            input()
+         if self.player_one_wins == needed_wins or self.player_two_wins == needed_wins:
+            break
 
      # Display Winner
-    def display_winner(self):
+   def display_winner(self):
        if self.player_one_wins > self.player_two_wins:
           print('Player One is the Winner!')
           input('Would you like to play again? y/n: ')
@@ -117,9 +117,9 @@ class Game:
           print('Player Two Wins!')
           input('Would you like to play again? y/n: ')
           ans = input
-       if ans is 'y':
+       if ans == 'y':
           self.display_welcome()
-       elif ans is 'n':
+       elif ans == 'n':
          return 
             
 
