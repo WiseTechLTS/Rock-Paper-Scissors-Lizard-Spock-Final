@@ -18,23 +18,21 @@ class Game:
         self.display_winner()
 
      # (5 points): As a developer, I want to make at least 10 commits with descriptive messages.
-    GesturesList = ["rock","paper","scissors","lizard","spock"]
-    
      # Display welcome message
     def display_welcome(self):
         print('Welcome to Rock Paper Scissors Lizard Spock Final! ')
      # Print Rules
     def display_rules(self):
-        print('// Rock crushes Scissors //')
-        print('// Scissors cuts Paper //') 
-        print('// Paper covers Rock //')
-        print('// Rock crushes Lizard //') 
-        print('// Lizard poisons Spock //')
-        print('//  Spock smashes Scissors //')
-        print('// Scissors decapitates Lizard //')
-        print('// Lizard eats Paper //') 
-        print('// Paper disproves Spock //')
-        print('// Spock vaporizes Rock //')
+        print('// Rock crushes Scissors')
+        print('// Scissors cuts Paper') 
+        print('// Paper covers Rock')
+        print('// Rock crushes Lizard') 
+        print('// Lizard poisons Spock')
+        print('// Spock smashes Scissors')
+        print('// Scissors decapitates Lizard')
+        print('// Lizard eats Paper') 
+        print('// Paper disproves Spock')
+        print('// Spock vaporizes Rock')
     
      # Function to select opponents
      # (10 points): As a player, I want the option of a single player (human vs AI) or a multiplayer (human vs human) game.
@@ -49,9 +47,8 @@ class Game:
         elif response == '2':
             self.player_two = Human('player_two')
             print('Player vs. Human')
-    
-    
-    # Main PLAY FUNCTION Best of Three 
+     
+     # Main PLAY FUNCTION Best of Three 
     def play(self):
         self.player_one.player_choice
         self.player_two.player_choice
@@ -73,7 +70,7 @@ class Game:
          # (10 points): As a developer, I want to store all of the gesture options/choices in a list. I want to find
             choice_dictionary = {"rock": 0, "paper": 1, "scissors": 2, "lizard": 3, "spock": 4}
        
-            choice_index = choice_dictionary.get(player_choice, 5)
+            choice_index = choice_dictionary.get(player_choice, 3)
             computer_index = choice_dictionary.get(computer_choice)
 
          ##  Our matrix is numbered to represent if we will win, lose, tie or be invalid
@@ -88,20 +85,32 @@ class Game:
          #(5 points): As a developer, I want to account for and handle bad user input, ensuring that any user input is validated and reobtained if necessary.
 
             result_idx = result_matrix[choice_index][computer_index]
-            result_note = ['Tie Round!', 'You Win!', 'Sorry, you lose', 'invalid choice, try again']
-            result = result_note[result_idx]
-
-            print(result_idx(result_note))
-
-         # Display Winner
+            result_note = {"Tie Round!": 0, "You Win!": 1, 'Sorry, you lose': 2, 'invalid choice, try again': 3}
+            #result = result_note[result_idx]
+            
+            if result_idx == 0:
+               print('Tie')
+            elif result_idx == 1:
+               print('Player Winner')
+               self.current_score()
+            elif result_idx ==2:
+               print('Computer / Human Winner!')
+               self.current_score()
+            elif result_idx == 3:
+               print('Invaild input. Try again: ')   
+               print(result_idx)
+               input()
+     
+     # Display Winner
     def display_winner(self):
-     while True:   
+      
       if self.player_one== 2:
-         False 
+    
          print("Player One is the Winner")
       elif self.player_two== 2:
-         False
+    
          print('Player Two is the Winner!')
+
 
     
     # No If statement RPSLS
