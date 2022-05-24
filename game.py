@@ -7,7 +7,9 @@ class Game:
     def __init__(self):
         self.player_one = Human('player_one')
         self.player_two = Player('player_two')
+        
         self.listed_gestures = ["rock", "paper", "scissors", "lizard", "spock"]
+        
         # This is all the players needed We will assign computer as player_two if chosen
     
     def run_game(self):
@@ -52,6 +54,8 @@ class Game:
     def play(self):
         self.player_one.player_choice
         self.player_two.player_choice
+        self.player_one_wins = 0
+        self.player_two_wins = 0
     # While loop for the main game phase
     # (10 points): As a player, I want the game of RPSLS to be at minimum a ‘best of three’ to decide a winner.
         while self.player_one.current_score < 2 and self.player_two.current_score < 2:
@@ -87,29 +91,37 @@ class Game:
             result_idx = result_matrix[choice_index][computer_index]
             result_note = {"Tie Round!": 0, "You Win!": 1, 'Sorry, you lose': 2, 'invalid choice, try again': 3}
             #result = result_note[result_idx]
+            needed_wins =2
             
             if result_idx == 0:
                print('Tie')
             elif result_idx == 1:
                print('Player Winner')
-               self.current_score()
+               self.player_one_wins +=1
             elif result_idx ==2:
                print('Computer / Human Winner!')
-               self.current_score()
+               self.player_two_wins +=1
             elif result_idx == 3:
                print('Invaild input. Try again: ')   
                print(result_idx)
                input()
-     
+            if self.player_one_wins == needed_wins or self.player_two_wins == needed_wins:
+               break
+
      # Display Winner
     def display_winner(self):
-      
-      if self.player_one== 2:
-    
-         print("Player One is the Winner")
-      elif self.player_two== 2:
-    
-         print('Player Two is the Winner!')
+       if self.player_one_wins > self.player_two_wins:
+          print('Player One is the Winner!')
+          input('Would you like to play again? y/n: ')
+       elif self.player_one_wins < self.player_two_wins:
+          print('Player Two Wins!')
+          input('Would you like to play again? y/n: ')
+          ans = input
+       if ans is 'y':
+          self.display_welcome()
+       elif ans is 'n':
+         return 
+            
 
 
     

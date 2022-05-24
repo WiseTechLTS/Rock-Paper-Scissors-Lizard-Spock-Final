@@ -9,4 +9,4 @@ class Human(Player):
         self.player_choice = input('What gesture would you like to play this round?  ')
 
     def current_score(self):
-        self.current_score +=1 
+        self.current_score = +1

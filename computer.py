@@ -11,4 +11,4 @@ class Computer(Player):
         self.computer_choice = choice(self.listed_gestures)
 
     def current_score(self):
-        self.current_score += 1
+        self.current_score = +1
