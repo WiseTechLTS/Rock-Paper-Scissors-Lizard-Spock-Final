@@ -5,19 +5,19 @@ from random import choice
 
 class Game:
    def __init__(self):
-       self.player_one = Human('player_one')
-       self.player_two = Player('player_two')
+      self.player_one = Human('player_one')
+      self.player_two = Player('player_two')
        
-       self.listed_gestures = ["rock", "paper", "scissors", "lizard", "spock"]
+      self.listed_gestures = ["rock", "paper", "scissors", "lizard", "spock"]
        
-       # This is all the players needed We will assign computer as player_two if chosen
+      # This is all the players needed We will assign computer as player_two if chosen
    
    def run_game(self):
-       self.display_welcome()
-       self.display_rules()
-       self.select_opponent()
-       self.play()
-       self.display_winner()  
+      self.display_welcome()
+      self.display_rules()
+      self.select_opponent()
+      self.display_winner()  
+      self.end_game()
     # (5 points): As a developer, I want to make at least 10 commits with descriptive messages.
     # Display welcome message
    def display_welcome(self):
@@ -43,13 +43,77 @@ class Game:
    def select_opponent(self):
        response = input('Type 1 for Player vs. Ai:  or  2 for Player vs. Player:  ')
        if response == '1':
-           self.player_two = Computer('player_two')
            print('Player vs. Ai!')
+           self.play()
        elif response == '2':
-           self.player_two = Human('player_two')
            print('Player vs. Human')
-    
-    # Main PLAY FUNCTION Best of Three 
+           self.play_human()
+
+   def play_human(self):
+       self.player_one.player_choice
+       self.player_two.player_choice
+       self.player_one_wins = 0
+       self.player_two_wins = 0
+   # While loop for the main game phase
+   # (10 points): As a player, I want the game of RPSLS to be at minimum a ‘best of three’ to decide a winner.
+       while self.player_one_wins < 2 and self.player_two_wins < 2:
+        # We want
+         print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
+         # Print our players choice desired = "Player Picked" playerChoice
+         self.player_one.player_choice = input('P1: ')
+         print("Player Picked", self.player_one.player_choice)
+         if self.player_one.player_choice == self.listed_gestures:
+          True
+         
+         # This is how we define our players choice
+         print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
+         self.player_two.player_choice = input('P2: ')
+         print("Player Two Picked", self.player_two.player_choice)
+         # This is our random computer choice
+         # We import random.choice so that we can randomly select from our 5 choices
+         #computer_choice = choice(self.listed_gestures)
+         # Display "Computer picked:" computerChoice
+         #print("Computer picked:", computer_choice)
+         # (10 points): As a developer, I want to store all of the gesture options/choices in a list. I want to find
+         choice_dictionary = {"rock": 0, "paper": 1,
+                              "scissors": 2, "lizard": 3, "spock": 4}
+
+         choice_index = choice_dictionary.get(self.player_one.player_choice, 3)
+         choice_index2 = choice_dictionary.get(self.player_two.player_choice, 3)
+
+         ##  Our matrix is numbered to represent if we will win, lose, tie or be invalid
+         result_matrix = [[0, 2, 1, 1, 2],
+                          [1, 0, 2, 2, 1],
+                          [2, 1, 0, 1, 2],
+                          [2, 1, 2, 0, 1],
+                          [1, 2, 1, 2, 0],
+                          [3, 3, 3, 3, 3]]
+
+         #(5 points): As a developer, I want to account for and handle bad user input, ensuring that any user input is validated and reobtained if necessary.
+         result_idx = result_matrix[choice_index][choice_index2]
+         result_note = {"Tie Round!": 0, "You Win!": 1,
+                        'Sorry, you lose': 2, 'invalid choice, try again': 3}
+         #result = result_note[result_idx]
+         needed_wins = 2
+
+         if result_idx == 0:
+            print('No Score: Possible input error:')
+         elif result_idx == 1:
+            print('Player One Winner')
+            self.player_one_wins += 1
+         elif result_idx == 2:
+            print('Player Two Winner!')
+            self.player_two_wins += 1
+         elif result_idx == 3:
+            print('Invaild input. Try again: ')
+            print(result_idx)
+            input()
+         if self.player_one_wins == needed_wins:
+            self.display_winner()
+         elif self.player_two_wins == needed_wins:
+            self.display_winner()
+            #self.display_winner()
+    # Main PLAY FUNCTION Best of Three player vs ai 
    def play(self):
        self.player_one.player_choice
        self.player_two.player_choice
@@ -60,13 +124,12 @@ class Game:
        while self.player_one_wins < 2 and self.player_two_wins < 2:
         # We want 
          print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
-         self.player_one.player_choice = input()
-         self.player_two.player_choice = input()
-         # This is how we define our players choice
-         self.player_two.player_choice = self.player_two.player_choice.lower()
+         self.player_one.player_choice = input('P1:  or type a for auto:' )
+         if self.player_one.player_choice == 'a':
+            self.player_one.player_choice = choice(self.listed_gestures)
+         else: pass 
          # Print our players choice desired = "Player Picked" playerChoice
          print("Player Picked", self.player_one.player_choice)
-         print("Player Two Picked", self.player_two.player_choice)
          # This is our random computer choice
          # We import random.choice so that we can randomly select from our 5 choices
          computer_choice = choice(self.listed_gestures)
@@ -99,7 +162,7 @@ class Game:
             print('Player Winner')
             self.player_one_wins +=1
          elif result_idx ==2:
-            print('Computer / Human Winner!')
+            print('Computer Winner!')
             self.player_two_wins +=1
          elif result_idx == 3:
             print('Invaild input. Try again: ')   
@@ -110,18 +173,24 @@ class Game:
 
      # Display Winner
    def display_winner(self):
-       if self.player_one_wins > self.player_two_wins:
-          print('Player One is the Winner!')
-          input('Would you like to play again? y/n: ')
-       elif self.player_one_wins < self.player_two_wins:
-          print('Player Two Wins!')
-          input('Would you like to play again? y/n: ')
-          ans = input
-       if ans == 'y':
-          self.display_welcome()
-       elif ans == 'n':
-         return 
-            
+      ans = input
+      if self.player_one_wins > self.player_two_wins:
+       print('Player One is the Winner!')
+      elif self.player_one_wins < self.player_two_wins:
+       print('Player Two Wins!')
+      else:
+       input('Invalid selection. Try again: ')
+       input('Would you like to play again? y/n: ')
+      if ans == 'y':
+       self.play()
+      elif ans == 'n':
+       self.display_welcome()
+      self.end_game()
+          
+          
+   def end_game(self):
+      stop = input('press enter')
+      return 
 
 
     
