@@ -60,14 +60,22 @@ class Game:
         # We want
          print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
          # Print our players choice desired = "Player Picked" playerChoice
-         self.player_one.player_choice = input('P1: ')
+         self.player_one.player_choice = input('P1: or type a for auto choice. ')
+         if self.player_one.player_choice == 'a':
+            self.player_one.player_choice = choice(self.listed_gestures)
+         else:
+            pass
          print("Player Picked", self.player_one.player_choice)
          if self.player_one.player_choice == self.listed_gestures:
           True
          
          # This is how we define our players choice
          print(" Type your selection:/ rock / paper / scissors / lizard / spock /")
-         self.player_two.player_choice = input('P2: ')
+         self.player_two.player_choice = input('P2: or type a for auto. ')
+         if self.player_two.player_choice == 'a':
+            self.player_two.player_choice = choice(self.listed_gestures)
+         else:
+            pass
          print("Player Two Picked", self.player_two.player_choice)
          # This is our random computer choice
          # We import random.choice so that we can randomly select from our 5 choices
